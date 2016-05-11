@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file alias="cancel">cancel.png</file>
+        <file alias="setting">setting.png</file>
+    </qresource>
+</RCC>

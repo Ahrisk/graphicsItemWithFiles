@@ -2,7 +2,8 @@
 #define WIDGET_H
 
 #include <QWidget>
-#include <background.h>
+#include "background.h"
+#include "fileitem.h"
 #include <QGraphicsView>
 
 namespace Ui {
@@ -20,7 +21,11 @@ public:
 private:
     Ui::Widget *ui;
     backGround *backgroundWithBox;
+    fileItem *item;
     QGraphicsScene *mainScene;
+
+private slots:
+    void newFileItem(const QRectF &bounding);
 };
 
 #endif // WIDGET_H

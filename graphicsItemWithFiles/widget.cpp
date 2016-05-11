@@ -14,9 +14,16 @@ Widget::Widget(QWidget *parent) :
     mainScene->addItem(backgroundWithBox);
     QGraphicsView *view = new QGraphicsView(mainScene, this);
     view->setGeometry(40, 30, 700, 500);
+    connect(backgroundWithBox, SIGNAL(newItem(QRectF)), this, SLOT(newFileItem(QRectF)));
 }
 
 Widget::~Widget()
 {
     delete ui;
+}
+
+void Widget::newFileItem(const QRectF &bounding)
+{
+    item = new fileItem(bounding);
+    mainScene->addItem(item);
 }

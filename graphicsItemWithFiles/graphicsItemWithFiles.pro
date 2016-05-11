@@ -24,3 +24,6 @@ HEADERS  += widget.h \
     fileitem.h
 
 FORMS    += widget.ui
+
+RESOURCES += \
+    resource.qrc
