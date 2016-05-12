@@ -94,5 +94,80 @@ void fileItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
     if ((rectTopLeft.x() - mousePoint.x() <= 3) && (mousePoint.x() - rectTopLeft.x() <= 3))
     {
         if ((rectTopLeft.y() - mousePoint.y() <= 3) && (mousePoint.y() - rectTopLeft.y() <= 3))
+            curse->setShape(Qt::SizeFDiagCursor);
+        else if ((rectBottomRight.y() - mousePoint.y() <= 3) && (mousePoint.y() - rectBottomRight.y() <= 3))
+            curse->setShape(Qt::SizeBDiagCursor);
+        else if ((mousePoint.y() <= rectBottomRight.y() - 3) && (mousePoint.y() >= rectTopLeft.y() + 3))
+            curse->setShape(Qt::SizeHorCursor);
     }
+    else if ((rectBottomRight.x() - mousePoint.x() <= 3) && (mousePoint.x() - rectBottomRight.x() <= 3))
+    {
+        if ((rectTopLeft.y() - mousePoint.y() <= 3) && (mousePoint.y() - rectTopLeft.y() <= 3))
+            curse->setShape(Qt::SizeBDiagCursor);
+        else if ((rectBottomRight.y() - mousePoint.y() <= 3) && (mousePoint.y() - rectBottomRight.y() <= 3))
+            curse->setShape(Qt::SizeFDiagCursor);
+        else if ((mousePoint.y() <= rectBottomRight.y() - 3) && (mousePoint.y() >= rectTopLeft.y() + 3))
+            curse->setShape(Qt::SizeHorCursor);
+    }
+    else if ((mousePoint.x() >= rectTopLeft.x() + 3) && (mousePoint.x() <= rectBottomRight.x() - 3))
+    {
+        if ((rectTopLeft.y() - mousePoint.y() <= 3) && (mousePoint.y() - rectTopLeft.y() <= 3))
+            curse->setShape(Qt::SizeVerCursor);
+        else if ((rectBottomRight.y() - mousePoint.y() <= 3) && (mousePoint.y() - rectBottomRight.y() <= 3))
+            curse->setShape(Qt::SizeVerCursor);
+        else if ((mousePoint.y() <= rectBottomRight.y() - 3) && (mousePoint.y() >= rectTopLeft.y() + 3))
+            curse->setShape(Qt::SizeAllCursor);
+    }
+    if ((mousePoint.x() <= rectBottomRight.x()) && (mousePoint.x() >= rectBottomRight.x() - 30) && (mousePoint.y() >= rectTopLeft.y()) && (mousePoint.y() <= rectTopLeft.y() + 15))
+        curse->setShape(Qt::PointingHandCursor);
+    this->setCursor(*curse);
+    update(boundingRect());
+    QGraphicsItem::hoverEnterEvent(event);
+}
+
+void fileItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+{
+    QPointF mousePoint = event->scenePos();
+    QPointF rectTopLeft = this->scenePos() + rectBound.topLeft();
+    QPointF rectBottomRight = this->scenePos() + rectBound.bottomRight();
+    if ((rectTopLeft.x() - mousePoint.x() <= 3) && (mousePoint.x() - rectTopLeft.x() <= 3))
+    {
+        if ((rectTopLeft.y() - mousePoint.y() <= 3) && (mousePoint.y() - rectTopLeft.y() <= 3))
+            curse->setShape(Qt::SizeFDiagCursor);
+        else if ((rectBottomRight.y() - mousePoint.y() <= 3) && (mousePoint.y() - rectBottomRight.y() <= 3))
+            curse->setShape(Qt::SizeBDiagCursor);
+        else if ((mousePoint.y() <= rectBottomRight.y() - 3) && (mousePoint.y() >= rectTopLeft.y() + 3))
+            curse->setShape(Qt::SizeHorCursor);
+    }
+    else if ((rectBottomRight.x() - mousePoint.x() <= 3) && (mousePoint.x() - rectBottomRight.x() <= 3))
+    {
+        if ((rectTopLeft.y() - mousePoint.y() <= 3) && (mousePoint.y() - rectTopLeft.y() <= 3))
+            curse->setShape(Qt::SizeBDiagCursor);
+        else if ((rectBottomRight.y() - mousePoint.y() <= 3) && (mousePoint.y() - rectBottomRight.y() <= 3))
+            curse->setShape(Qt::SizeFDiagCursor);
+        else if ((mousePoint.y() <= rectBottomRight.y() - 3) && (mousePoint.y() >= rectTopLeft.y() + 3))
+            curse->setShape(Qt::SizeHorCursor);
+    }
+    else if ((mousePoint.x() >= rectTopLeft.x() + 3) && (mousePoint.x() <= rectBottomRight.x() - 3))
+    {
+        if ((rectTopLeft.y() - mousePoint.y() <= 3) && (mousePoint.y() - rectTopLeft.y() <= 3))
+            curse->setShape(Qt::SizeVerCursor);
+        else if ((rectBottomRight.y() - mousePoint.y() <= 3) && (mousePoint.y() - rectBottomRight.y() <= 3))
+            curse->setShape(Qt::SizeVerCursor);
+        else if ((mousePoint.y() <= rectBottomRight.y() - 3) && (mousePoint.y() >= rectTopLeft.y() + 3))
+            curse->setShape(Qt::SizeAllCursor);
+    }
+    if ((mousePoint.x() <= rectBottomRight.x()) && (mousePoint.x() >= rectBottomRight.x() - 30) && (mousePoint.y() >= rectTopLeft.y()) && (mousePoint.y() <= rectTopLeft.y() + 15))
+        curse->setShape(Qt::PointingHandCursor);
+    this->setCursor(*curse);
+    update(boundingRect());
+    QGraphicsItem::hoverEnterEvent(event);
+}
+
+void fileItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
+    curse->setShape(Qt::ArrowCursor);
+    this->setCursor(*curse);
+    update(boundingRect());
+    QGraphicsItem::hoverLeaveEvent(event);
 }
