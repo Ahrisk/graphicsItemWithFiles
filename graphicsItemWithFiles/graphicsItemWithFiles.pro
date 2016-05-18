@@ -16,14 +16,17 @@ SOURCES += main.cpp\
         widget.cpp \
     background.cpp \
     boxitem.cpp \
-    fileitem.cpp
+    fileitem.cpp \
+    settingdialog.cpp
 
 HEADERS  += widget.h \
     background.h \
     boxitem.h \
-    fileitem.h
+    fileitem.h \
+    settingdialog.h
 
-FORMS    += widget.ui
+FORMS    += widget.ui \
+    settingdialog.ui
 
 RESOURCES += \
     resource.qrc

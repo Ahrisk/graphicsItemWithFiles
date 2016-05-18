@@ -10,8 +10,8 @@ class backGround : public QObject, public QGraphicsPixmapItem
     Q_OBJECT
 
 public:
-    backGround(QGraphicsItem *parent = 0);
-    backGround(const QPixmap &pix, QGraphicsItem *parent = 0);
+    backGround(const int &sceneWidth, const int &sceneHeight, QGraphicsItem *parent = 0);
+    backGround(const int &sceneWidth, const int &sceneHeight, const QPixmap &pix, QGraphicsItem *parent = 0);
     virtual ~backGround();
     void setBackground(const QImage &sourceImage);
     void setBackground(const QPixmap &sourceMap);
@@ -30,6 +30,7 @@ private:
     QPointF startPoint, endingPoint;
     boxItem *box;
     bool funnyTag;
+    int sceneWidth, sceneHeight;
 };
 #endif // BACKGROUND
 

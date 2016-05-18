@@ -5,20 +5,24 @@
 #define GETPOS(a,b)    QPointF(MIN2((a).x(),(b).x()),MIN2((a).y(),(b).y()))
 #define GETSIZE(a,b)   QSizeF(MAX2((a).x(),(b).x())-MIN2((a).x(),(b).x()),MAX2((a).y(),(b).y())-MIN2((a).y(),(b).y()))
 
-backGround::backGround(QGraphicsItem *parent) : QGraphicsPixmapItem(parent)
+backGround::backGround(const int &sceneWidth, const int &sceneHeight, QGraphicsItem *parent) : QGraphicsPixmapItem(parent)
 {
     box = NULL;
     funnyTag = false;
     startPoint = QPointF(0, 0);
     endingPoint = QPointF(0, 0);
+    this->sceneWidth = sceneWidth;
+    this->sceneHeight = sceneHeight;
 }
 
-backGround::backGround(const QPixmap &pix, QGraphicsItem *parent) : QGraphicsPixmapItem(pix, parent)
+backGround::backGround(const int &sceneWidth, const int &sceneHeight, const QPixmap &pix, QGraphicsItem *parent) : QGraphicsPixmapItem(pix, parent)
 {
     box = NULL;
     funnyTag = true;
     startPoint = QPointF(0, 0);
     endingPoint = QPointF(0, 0);
+    this->sceneWidth = sceneWidth;
+    this->sceneHeight = sceneHeight;
 }
 
 backGround::~backGround()
@@ -41,7 +45,6 @@ void backGround::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        qDebug() << "real press";
         startPoint = event->pos();
         endingPoint = startPoint;
         box = new boxItem(this);
@@ -57,8 +60,7 @@ void backGround::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     if (event->buttons() & Qt::LeftButton)
     {
         endingPoint = event->pos();
-        qDebug() << GETPOS(startPoint, endingPoint);
-        qDebug() << GETSIZE(startPoint, endingPoint);
+        endingPoint = QPointF(MIN2(sceneWidth, MAX2(0, endingPoint.x())), MIN2(sceneHeight, MAX2(0, endingPoint.y())));
         if (funnyTag)
             box->setPos(GETPOS(startPoint, endingPoint));
         else
@@ -75,6 +77,7 @@ void backGround::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     if (event->button() == Qt::LeftButton)
     {
         endingPoint = event->pos();
+        endingPoint = QPointF(MIN2(sceneWidth, MAX2(0, endingPoint.x())), MIN2(sceneHeight, MAX2(0, endingPoint.y())));
         emit newItem(QRectF(GETPOS(startPoint, endingPoint), GETSIZE(startPoint, endingPoint)));
         if (box)
         {
